@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "photogrammetry-eo"
+version = "2.0.0"
+description = "摄影测量外方位元素解算系统：共线条件方程 + Levenberg–Marquardt 平差 + Tkinter 界面"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "zbf1154" }]
+keywords = [
+    "photogrammetry",
+    "exterior-orientation",
+    "collinearity-equations",
+    "bundle-adjustment",
+    "levenberg-marquardt",
+    "tkinter",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = ["numpy>=1.21"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff>=0.5,<1.0"]
+
+[project.scripts]
+photogrammetry-gui = "photogrammetry.gui:main"
+
+[project.urls]
+Repository = "https://github.com/zbf1154-ctrl/Photogrammetry"
+Issues = "https://github.com/zbf1154-ctrl/Photogrammetry/issues"
+
+[tool.setuptools]
+packages = ["photogrammetry"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "PIE", "ISC", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
