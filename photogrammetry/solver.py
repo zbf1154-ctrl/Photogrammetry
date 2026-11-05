@@ -273,13 +273,17 @@ def _levenberg_marquardt(
             damping *= 10.0
 
         if not accepted:
+            # 到达极小值附近时，舍入误差可能使任何试探步都无法进一步降低代价函数；
+            # 此时若试探步已经足够小，同样视为收敛。
+            if step is not None and np.max(np.abs(step)) <= max(10.0 * tol, 1e-8):
+                converged = True
             break
 
         cost_history.append(cost)
         if np.max(np.abs(step)) < tol:
             converged = True
             break
-        if improvement <= 1e-15 * max(cost, 1.0):
+        if improvement <= 1e-9 * max(cost, 1e-30):
             converged = True
             break
         if damping > 1e14:
